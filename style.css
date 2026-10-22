@@ -1,0 +1,294 @@
+/* --- Базовые настройки --- */
+:root {
+  --bg-color: #f0f6fc;       /* Светло-голубой фон, как на EF SET */
+  --card-bg: #ffffff;
+  --primary-blue: #0078ff;   /* Основной синий цвет */
+  --primary-hover: #005fcc;
+  --text-main: #1e293b;      /* Темно-серый текст */
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', sans-serif; }
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Шапка и подвал --- */
+.site-header {
+  background: #fff;
+  padding: 20px 0;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.logo span { color: var(--primary-blue); }
+
+.site-footer {
+  margin-top: auto;
+  padding: 30px 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* --- Основной контейнер --- */
+.app-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  flex: 1;
+}
+
+.screen { display: none; animation: fadeIn 0.3s ease-out forwards; }
+.screen.active { display: block; }
+.hidden { display: none !important; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* --- Главное меню --- */
+.menu-header { text-align: center; margin-bottom: 40px; }
+.menu-header h1 { font-size: 1.8rem; margin-bottom: 10px; color: var(--text-main); }
+.menu-header p { color: var(--text-muted); }
+
+.levels-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+.level-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.level-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border-color: var(--primary-blue);
+}
+.level-card h3 { font-size: 1.2rem; margin-bottom: 8px; color: var(--primary-blue); }
+.level-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; }
+.best-score { font-size: 0.85rem; font-weight: 600; color: var(--success); }
+
+/* --- Экран теста (Стиль EF SET) --- */
+.test-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.test-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 80px;
+}
+
+.progress-container { flex-grow: 1; }
+.progress-track {
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: #a0c4ff; /* Светло-синий прогресс */
+  width: 0%;
+  transition: width 0.3s ease;
+  border-radius: 3px;
+}
+
+.timer-box {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--primary-blue);
+  min-width: 60px;
+  text-align: right;
+}
+.timer-box.warning { color: var(--danger); }
+
+.header-divider {
+  height: 3px;
+  background: var(--primary-blue);
+  margin-bottom: 40px;
+  border-radius: 2px;
+}
+
+/* Карточка вопроса */
+.question-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.question-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 650px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.question-card h2 {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+.options-list { display: flex; flex-direction: column; gap: 12px; }
+
+.option-btn {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-main);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Имитация радиокнопки */
+.option-btn::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--primary-blue);
+  background: #f8fafc;
+}
+
+.option-btn.selected {
+  border-color: var(--primary-blue);
+  background: #eff6ff;
+}
+.option-btn.selected::before {
+  border-color: var(--primary-blue);
+  background: var(--primary-blue);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+/* Состояния правильного/неправильного ответа */
+.option-btn.correct {
+  border-color: var(--success);
+  background: #ecfdf5;
+}
+.option-btn.correct::before {
+  border-color: var(--success);
+  background: var(--success);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+.option-btn.incorrect {
+  border-color: var(--danger);
+  background: #fef2f2;
+}
+.option-btn.incorrect::before {
+  border-color: var(--danger);
+  background: var(--danger);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+/* Кнопки */
+.btn-primary {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto 20px;
+  padding: 14px 20px;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 30px; /* Овальная кнопка, как на EF SET */
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--primary-hover); }
+
+.btn-text {
+  display: block;
+  margin: 0 auto;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.btn-text:hover { color: var(--text-main); }
+
+/* --- Экран результатов --- */
+.result-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.score-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 6px solid var(--primary-blue);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+}
+
+#score-text { font-size: 2.5rem; font-weight: 700; color: var(--primary-blue); line-height: 1; }
+.score-circle small { color: var(--text-muted); font-size: 0.9rem; }
+
+#result-message { font-size: 1.1rem; margin-bottom: 30px; color: var(--text-muted); }
+
+/* --- Адаптивность --- */
+@media (max-width: 600px) {
+  .levels-grid { grid-template-columns: 1fr; }
+  .question-card { padding: 20px; }
+  .question-card h2 { font-size: 1.1rem; }
+  .option-btn { padding: 12px 15px; font-size: 0.95rem; }
+  .test-header { font-size: 0.8rem; }
+}

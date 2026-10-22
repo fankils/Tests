@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinguaPro | Тестирование</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Шапка сайта -->
+  <header class="site-header">
+    <div class="logo">Lingua<span>Pro</span></div>
+  </header>
+
+  <main class="app-container">
+    
+    <!-- ЭКРАН 1: Главное меню -->
+    <section id="menu-screen" class="screen active">
+      <div class="menu-header">
+        <h1>Проверь свой английский</h1>
+        <p>Выбери уровень сложности, чтобы начать тест.</p>
+      </div>
+      
+      <div class="levels-grid" id="levels-grid">
+        <!-- Карточки генерируются в JS -->
+      </div>
+    </section>
+
+    <!-- ЭКРАН 2: Прохождение теста -->
+    <section id="quiz-screen" class="screen">
+      <!-- Верхняя панель с прогрессом и таймером -->
+      <div class="test-header">
+        <div class="test-info">
+          <span class="test-icon">📖</span>
+          <span class="test-name">Тест</span>
+        </div>
+        <div class="progress-container">
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-bar"></div>
+          </div>
+        </div>
+        <div class="timer-box">
+          <span id="timer">15:00</span>
+        </div>
+      </div>
+      
+      <!-- Синяя разделительная линия -->
+      <div class="header-divider"></div>
+
+      <!-- Карточка с вопросом -->
+      <div class="question-wrapper">
+        <div class="question-card">
+          <h2 id="question-text">Текст вопроса...</h2>
+          <div class="options-list" id="options-container">
+            <!-- Варианты ответов -->
+          </div>
+        </div>
+      </div>
+      
+      <button id="btn-next" class="btn-primary hidden">Далее</button>
+      <button id="btn-quit" class="btn-text">Завершить тест</button>
+    </section>
+
+    <!-- ЭКРАН 3: Результаты -->
+    <section id="result-screen" class="screen">
+      <div class="result-card">
+        <h2 id="result-title">Тест завершен</h2>
+        <div class="score-circle">
+          <span id="score-text">0</span>
+          <small>из 20</small>
+        </div>
+        <p id="result-message">...</p>
+        <button id="btn-back-menu" class="btn-primary">Вернуться в меню</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Подвал -->
+  <footer class="site-footer">
+    <p>© LinguaPro. Все права защищены.</p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
